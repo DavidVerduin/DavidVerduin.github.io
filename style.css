@@ -1,6 +1,6 @@
 :root {
   --g1: rgb(98, 0, 234);
-  --g2: rgb(236, 127, 64);
+  --g2: rgb(236, 64, 122);
 }
 
 @keyframes background-pan {
@@ -27,16 +27,17 @@ body {
   margin: 0px;
 }
 
-body.toggled {
-  animation: none;
+body.resume_visible {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
+/* body.toggled {
+  animation: none;
+} */
 
 body.toggled > #title {
   opacity: 1;
-}
-
-body.toggled > #icon {
-  opacity: 0;
 }
 
 body.toggled > #tiles > .tile:hover {
@@ -77,6 +78,11 @@ body.toggled > #tiles > .tile:hover {
   position: absolute;
 }
 
+body.resume_visible #title {
+  opacity: 0;
+  display: none;
+}
+
 #title {
   color: white;
   font-family: "Rubik", sans-serif;
@@ -96,13 +102,62 @@ body.toggled > #tiles > .tile:hover {
   line-height: 0.9em;
 }
 
-#icon {
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 80vmin;
-  opacity: 1;
-  pointer-events: none;
+/* -- Content Resume -- */
+
+#resume_container {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  transform: translate(-100%, -100%);
+  transition: translate 5200ms ease;
   transition: opacity 1200ms ease;
-  z-index: 1;
+}
+
+#resume_container.resume_visible {
+  opacity: 1;
+  font-family: "Rubik", sans-serif;
+  transform: translate(0, 0);
+  display: flex;
+}
+
+#resume_container .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#resume_container .card {
+  border: 1px solid var(--g2);
+  border-radius: 1rem;
+  box-shadow: 0 1px 1px 1px;
+  margin: 0.5rem auto;
+  width: 80%;
+  background-color: rgb(18, 18, 18);
+  color: azure;
+  padding: 1rem;
+}
+
+#resume_container .card h1{
+  margin: 0.7rem;
+}
+
+#resume_container .card p {
+  margin: 1rem;
+}
+
+#image_container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-grow: 1;
+}
+
+@media (orientation: landscape) {
+  .resume_visible #image_container {
+    display: flex;
+  }
 }
 
 /* -- YouTube Link Styles -- */
